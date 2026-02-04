@@ -1,0 +1,37 @@
+{
+  "name": "port-plaisance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "C'est un Api qui permet de gerer les reservation d'un porte de plaisance Russell",
+  "keywords": [
+    "port",
+    "plaissance"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin https://github.com/kader30/port_plaisance.git"
+  },
+  "license": "GPL-3.0",
+  "author": "Bensadi Abdelkader",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "express": "~4.16.1",
+    "express-ejs-layouts": "^2.5.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsdoc": "^4.0.5",
+    "mongoose": "^9.1.6",
+    "morgan": "~1.9.1",
+    "nodemon": "^3.1.11"
+  },
+  "devDependencies": {}
+}
