@@ -1,0 +1,8 @@
+<h1>Détails de la réservation</h1>
+
+<p><strong>Client :</strong> <%= reservation.clientName %></p>
+<p><strong>Bateau :</strong> <%= reservation.boatName %></p>
+<p><strong>Début :</strong> <%= reservation.startDate.toLocaleDateString() %></p>
+<p><strong>Fin :</strong> <%= reservation.endDate.toLocaleDateString() %></p>
+
+<a href="/catways/<%= reservation.catwayNumber %>/reservations">Retour</a>

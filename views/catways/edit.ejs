@@ -1,0 +1,10 @@
+<h1>Modifier le catway</h1>
+
+<form action="/catways/<%= catway.catwayNumber %>?_method=PUT" method="POST">
+  <label>État</label>
+  <input type="text" name="catwayState" value="<%= catway.catwayState %>" required>
+
+  <button type="submit">Mettre à jour</button>
+</form>
+
+<a href="/catways">Retour</a>
