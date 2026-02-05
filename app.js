@@ -47,10 +47,7 @@ app.use('/users', userRoutes);
 app.use('/catways', catwayRoutes);
 app.use('/reservations', reservationRoutes);
 
-// LANCEMENT SERVEUR
-app.listen(process.env.PORT, () =>
-  console.log(`Serveur lancé sur http://localhost:${process.env.PORT}`)
-);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -66,5 +63,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// LANCEMENT SERVEUR
+app.listen(process.env.PORT, () =>
+  console.log(`Serveur lancé sur http://localhost:${process.env.PORT}`)
+);
+
+
 
 module.exports = app;
