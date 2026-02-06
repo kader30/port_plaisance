@@ -14,7 +14,7 @@ router.get('/:id/reservations/create', authJWT, serviceReservation.CreateReserva
 
 
 // PAGE ÉDITION
-  router.get('/:id/reservations/:resId/edit', authJWT, serviceReservation.EditReservation);
+ // router.get('/:id/reservations/:resId/edit', authJWT, serviceReservation.EditReservation);
 
 // MISE À JOUR
   router.put('/:id/reservations/:resId', authJWT, serviceReservation.updateReservation); 
