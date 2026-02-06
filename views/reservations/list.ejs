@@ -26,13 +26,13 @@
       <td><%= new Date(r.startDate).toLocaleDateString("fr-FR") %></td>
       <td><%= new Date(r.endDate).toLocaleDateString("fr-FR") %></td>
       <td>
-        <% if (catwayNumber) { %>
-          <a href="/catways/<%= catwayNumber %>/reservations/<%= r._id %>">Voir</a>
-          <a href="/catways/<%= catwayNumber %>/reservations/<%= r._id %>/edit">Modifier</a>
-          <form action="/catways/<%= catwayNumber %>/reservations/<%= r._id %>?_method=DELETE" method="POST" style="display:inline;">
+       
+          <a href="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>">Voir</a>
+          <a href="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>/edit">Modifier</a>
+          <form action="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>?_method=DELETE" method="POST" style="display:inline;">
             <button type="submit">Supprimer</button>
           </form>
-        <% } %>
+        
       </td>
     </tr>
   <% }) %>
