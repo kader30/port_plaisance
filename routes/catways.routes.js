@@ -1,33 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const Catway = require('../models/Catway');
-
+const catwayService = require('../services/catways.service');
 const authJWT = require('../middleware/authJWT');
-router.get('/', authJWT, async (req, res) => {
-  res.json(await Catway.find());
-});
+router.get('/', authJWT, catwayService.getAllCatways);
 
-router.get('/:id', authJWT, async (req, res) => {
-  res.json(await Catway.findOne({ catwayNumber: req.params.id }));
-});
+router.get('/:id', authJWT, catwayService.getCatwayByNumber);
 
-router.post('/', authJWT, async (req, res) => {
-  const catway = new Catway(req.body);
-  await catway.save();
-  res.status(201).json(catway);
-});
+router.post('/', authJWT, catwayService.createCatway);
 
-router.put('/:id', authJWT, async (req, res) => {
-  res.json(await Catway.findOneAndUpdate(
-    { catwayNumber: req.params.id },
-    { catwayState: req.body.catwayState },
-    { new: true }
-  ));
-});
+router.put('/:id', authJWT, catwayService.updateCatway);
 
-router.delete('/:id', authJWT, async (req, res) => {
-  await Catway.findOneAndDelete({ catwayNumber: req.params.id });
-  res.status(204).send();
-});
+router.delete('/:id', authJWT, catwayService.deleteCatway);
 
 module.exports = router;

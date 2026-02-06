@@ -17,6 +17,8 @@ const authRoutes = require('./routes/routes.auth');
 const userRoutes = require('./routes/users.routes');
 const catwayRoutes = require('./routes/catways.routes');
 const reservationRoutes = require('./routes/reservations.routes');
+const methodOverride = require('method-override');
+
 mongoDB.initClientDbConnection();
 var app = express();
 //Middleware pour parser le body des requêtes
@@ -29,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method'));
 // PAGE ACCUEIL
 app.get('/', (req, res) => res.render('index', { title: "Accueil" }));
 app.get('/dashboard', authJWT, (req, res) => { 
@@ -45,7 +48,7 @@ app.use('/reservations', reservationsPages);
 app.use('/', authRoutes);
 app.use('/users', userRoutes);
 app.use('/catways', catwayRoutes);
-app.use('/reservations', reservationRoutes);
+app.use('/catways', reservationRoutes);
 
 
 // catch 404 and forward to error handler
@@ -61,7 +64,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { title: "Erreur", error: err, message: err.message });
 });
 
 

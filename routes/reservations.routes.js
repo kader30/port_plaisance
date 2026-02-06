@@ -1,62 +1,25 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const Reservation = require('../models/Reservation');
+const serviceReservation = require('../services/reservations.service');
 const authJWT = require('../middleware/authJWT');
 
 // LISTE DES RÉSERVATIONS D’UN CATWAY
-router.get('/:id/reservations', authJWT, async (req, res) => {
-  const reservations = await Reservation.find({ catwayNumber: req.params.id });
-
-  res.render('reservations/list', {
-    title: "Réservations",
-    reservations,
-    catwayNumber: req.params.id
-  });
-});
-
+router.get('/:id/reservations', authJWT, serviceReservation.getReservationsByCatway);   
 // PAGE CRÉATION
-router.get('/:id/reservations/create', authJWT, (req, res) => {
-  res.render('reservations/create', {
-    title: "Créer une réservation",
-    catwayNumber: req.params.id
-  });
-});
+router.get('/:id/reservations/create', authJWT, serviceReservation.CreateReservation);
 
 // CRÉATION
-router.post('/:id/reservations', authJWT, async (req, res) => {
-  const reservation = new Reservation({
-    clientName: req.body.clientName,
-    boatName: req.body.boatName,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    catwayNumber: req.params.id
-  });
+  router.post('/:id/reservations', authJWT, serviceReservation.createReservation);
 
-  await reservation.save();
 
-  res.redirect(`/catways/${req.params.id}/reservations`);
-});
-
-// PAGE DÉTAILS
-router.get('/:id/reservations/:resId', authJWT, async (req, res) => {
-  const reservation = await Reservation.findById(req.params.resId);
-
-  res.render('reservations/detail', {
-    title: "Détails réservation",
-    reservation,
-    catwayNumber: req.params.id
-  });
-});
 
 // PAGE ÉDITION
-router.get('/:id/reservations/:resId/edit', authJWT, async (req, res) => {
-  const reservation = await Reservation.findById(req.params.resId);
+  router.get('/:id/reservations/:resId/edit', authJWT, serviceReservation.EditReservation);
 
-  res.render('reservations/edit', {
-    title: "Modifier réservation",
-    reservation,
-    catwayNumber: req.params.id
-  });
-});
+// MISE À JOUR
+  router.put('/:id/reservations/:resId', authJWT, serviceReservation.updateReservation); 
+
+// SUPPRESSION
+  router.delete('/:id/reservations/:resId', authJWT, serviceReservation.deleteReservation);
 
 module.exports = router;
