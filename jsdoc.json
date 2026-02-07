@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["./routes","app.js", "./pages", "./services", "./models"],
+    "include": ["./routes","app.js", "./pages", "./services", "./models", "./middleware"],
     "includePattern": ".js$",
     "excludePattern": "(node_modules|public)"
   },
