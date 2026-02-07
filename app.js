@@ -34,9 +34,9 @@ const mongoDB = require('./data_base/port_russellDb');
 const authJWT = require('./middleware/authJWT');
 
 //Routes Pages
-const usersPages =  require('./pages/users.pages');
-const catwaysPages =  require('./pages/catways.pages');
-const reservationsPages =  require('./pages/reservations.pages');
+const usersPages = require('./pages/users.pages');
+const catwaysPages = require('./pages/catways.pages');
+const reservationsPages = require('./pages/reservations.pages');
 //Routes API
 const authRoutes = require('./routes/routes.auth');
 const userRoutes = require('./routes/users.routes');
@@ -130,7 +130,7 @@ app.use('/catways', reservationRoutes);
  * @param {Response} res
  * @param {Next} next
  */
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
@@ -148,7 +148,7 @@ app.use(function(req, res, next) {
  * - le message d'erreur
  * - les détails uniquement en mode développement
  */
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

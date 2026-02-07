@@ -9,12 +9,12 @@ router.get('/', authJWT, serviceUser.getAllUsers);
 
 // ajouter les autres routes CRUD pour les utilisateurs (POST, PUT, DELETE)
 // POST /users - créer un nouvel utilisateur
-router.post('/', authJWT, serviceUser.createUser); 
+router.post('/', authJWT, serviceUser.createUser);
 
 // GET /users/:email - récupérer les détails d'un utilisateur
-router.get('/:email', authJWT, serviceUser.getUserByEmail); 
+router.get('/:email', authJWT, serviceUser.getUserByEmail);
 // PUT /users/:email - mettre à jour un utilisateur
-router.put('/:email', authJWT, serviceUser.updateUser); 
+router.put('/:email', authJWT, serviceUser.updateUser);
 // DELETE /users/:email - supprimer un utilisateur
 router.delete('/:email', authJWT, serviceUser.deleteUser);
 

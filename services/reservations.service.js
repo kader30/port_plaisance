@@ -14,16 +14,16 @@ const Reservation = require('../models/Reservation');
 // LISTE DES RÉSERVATIONS D’UN CATWAY
 
 exports.getReservationsByCatway = async (req, res, next) => {
-  try {
-    const reservations = await Reservation.find({ catwayNumber: req.params.id });
-    res.render('reservations/list', {
-      title: "Réservations du catway " + req.params.id,
-      reservations,
-      catwayNumber: req.params.id
-    });
-  } catch (error) {
-    next(error);
-  }
+    try {
+        const reservations = await Reservation.find({ catwayNumber: req.params.id });
+        res.render('reservations/list', {
+            title: "Réservations du catway " + req.params.id,
+            reservations,
+            catwayNumber: req.params.id
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 // PAGE FORMULAIRE DE CRÉATION
@@ -38,14 +38,14 @@ exports.getReservationsByCatway = async (req, res, next) => {
  * @returns {Promise<void>}
  */
 exports.CreateReservation = async (req, res, next) => {
-  try {
-    res.render('reservations/create', {
-      title: "Créer une réservation",
-      catwayNumber: req.params.id
-    });
-  } catch (error) {
-    next(error);
-  }
+    try {
+        res.render('reservations/create', {
+            title: "Créer une réservation",
+            catwayNumber: req.params.id
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 // CRÉATION
@@ -60,37 +60,37 @@ exports.CreateReservation = async (req, res, next) => {
  * @returns {Promise<void>}
  */
 exports.createReservation = async (req, res, next) => {
-  try {
-    const newReservation = new Reservation({
-      clientName: req.body.clientName,
-      boatName: req.body.boatName,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      catwayNumber: req.params.id
-    });
+    try {
+        const newReservation = new Reservation({
+            clientName: req.body.clientName,
+            boatName: req.body.boatName,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            catwayNumber: req.params.id
+        });
 
-    await newReservation.save();
-    res.redirect(`/catways/${req.params.id}/reservations`);
-  } catch (error) {
-    next(error);
-  }
+        await newReservation.save();
+        res.redirect(`/catways/${req.params.id}/reservations`);
+    } catch (error) {
+        next(error);
+    }
 };
 
 // PAGE ÉDITION
- // Affiche la page d’édition d’une réservation.
- 
-exports.EditReservation = async (req, res, next) => {
-  try {
-    const reservation = await Reservation.findById(req.params.resId);
+// Affiche la page d’édition d’une réservation.
 
-    res.render('reservations/edit', {
-      title: "Modifier réservation",
-      reservation,
-      catwayNumber: req.params.id
-    });
-  } catch (error) {
-    next(error);
-  }
+exports.EditReservation = async (req, res, next) => {
+    try {
+        const reservation = await Reservation.findById(req.params.resId);
+
+        res.render('reservations/edit', {
+            title: "Modifier réservation",
+            reservation,
+            catwayNumber: req.params.id
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 // MISE À JOUR
@@ -105,12 +105,12 @@ exports.EditReservation = async (req, res, next) => {
  * @returns {Promise<void>}
  */
 exports.updateReservation = async (req, res, next) => {
-  try {
-    await Reservation.findByIdAndUpdate(req.params.resId, req.body);
-    res.redirect(`/catways/${req.params.id}/reservations`);
-  } catch (error) {
-    next(error);
-  }
+    try {
+        await Reservation.findByIdAndUpdate(req.params.resId, req.body);
+        res.redirect(`/catways/${req.params.id}/reservations`);
+    } catch (error) {
+        next(error);
+    }
 };
 
 //delete reservation
@@ -126,16 +126,16 @@ exports.updateReservation = async (req, res, next) => {
  * @throws {Error} Si la réservation n’existe pas
  */
 exports.deleteReservation = async (req, res, next) => {
-  try {
-    const deleted = await Reservation.findByIdAndDelete(req.params.resId);
+    try {
+        const deleted = await Reservation.findByIdAndDelete(req.params.resId);
 
-    if (!deleted) {
-      throw new Error("Réservation non trouvée");
+        if (!deleted) {
+            throw new Error("Réservation non trouvée");
+        }
+
+        res.redirect(`/catways/${req.params.id}/reservations`);
+    } catch (error) {
+        next(error);
     }
-
-    res.redirect(`/catways/${req.params.id}/reservations`);
-  } catch (error) {
-    next(error);
-  }
 };
 

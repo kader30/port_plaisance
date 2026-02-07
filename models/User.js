@@ -21,7 +21,7 @@ const bcrypt = require('bcrypt');
  */
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
-  email:    { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 6 }
 });
 
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
  *
  * @param {Function} next - Callback permettant de poursuivre la sauvegarde.
  */
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 10);
 });
@@ -52,7 +52,7 @@ userSchema.pre('save', async function(next) {
  * @param {string} password - Mot de passe en clair à vérifier.
  * @returns {Promise<boolean>} Résultat de la comparaison.
  */
-userSchema.methods.comparePassword = function(password) {
+userSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 

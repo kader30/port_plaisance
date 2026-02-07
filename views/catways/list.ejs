@@ -10,11 +10,17 @@
     <th>Actions</th>
   </tr>
 
-  <% catways.forEach(c => { %>
+  <% catways.forEach(c=> { %>
     <tr>
-      <td><%= c.catwayNumber %></td>
-      <td><%= c.catwayType %></td>
-      <td><%= c.catwayState %></td>
+      <td>
+        <%= c.catwayNumber %>
+      </td>
+      <td>
+        <%= c.catwayType %>
+      </td>
+      <td>
+        <%= c.catwayState %>
+      </td>
       <td>
         <a href="/catways/<%= c.catwayNumber %>">Voir</a>
         <a href="/catways/<%= c.catwayNumber %>/edit">Modifier</a>
@@ -23,5 +29,5 @@
         </form>
       </td>
     </tr>
-  <% }) %>
+    <% }) %>
 </table>

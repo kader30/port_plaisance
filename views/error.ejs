@@ -1,8 +1,10 @@
-
-<h1>Erreur <%= error.status || 500 %></h1>
-<p><%= message %></p>
+<h1>Erreur <%= error.status || 500 %>
+</h1>
+<p>
+    <%= message %>
+</p>
 
 <% if (error.stack) { %>
-<pre><%= error.stack %></pre>
-<% } %>
-<a href="/">Retour à l'accueil</a>
+    <pre><%= error.stack %></pre>
+    <% } %>
+        <a href="/">Retour à l'accueil</a>

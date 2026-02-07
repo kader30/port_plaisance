@@ -1,45 +1,54 @@
 <h1>
   <% if (catwayNumber) { %>
     Réservations du catway <%= catwayNumber %>
-  <% } else { %>
-    Toutes les réservations
-  <% } %>
+      <% } else { %>
+        Toutes les réservations
+        <% } %>
 </h1>
 
 <% if (catwayNumber) { %>
   <a href="/catways/<%= catwayNumber %>/reservations/create">Créer une réservation</a>
-<% } %>
+  <% } %>
 
-<table border="1">
-  <tr>
-    <th>Client</th>
-    <th>Bateau</th>
-    <th>Début</th>
-    <th>Fin</th>
-    <th>Actions</th>
-  </tr>
+    <table border="1">
+      <tr>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Actions</th>
+      </tr>
 
-  <% reservations.forEach(r => { %>
-    <tr>
-      <td><%= r.clientName %></td>
-      <td><%= r.boatName %></td>
-      <td><%= new Date(r.startDate).toLocaleDateString("fr-FR") %></td>
-      <td><%= new Date(r.endDate).toLocaleDateString("fr-FR") %></td>
-      <td>
-       
-          <a href="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>">Voir</a>
-          <a href="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>/edit">Modifier</a>
-          <form action="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>?_method=DELETE" method="POST" style="display:inline;">
-            <button type="submit">Supprimer</button>
-          </form>
-        
-      </td>
-    </tr>
-  <% }) %>
-</table>
+      <% reservations.forEach(r=> { %>
+        <tr>
+          <td>
+            <%= r.clientName %>
+          </td>
+          <td>
+            <%= r.boatName %>
+          </td>
+          <td>
+            <%= new Date(r.startDate).toLocaleDateString("fr-FR") %>
+          </td>
+          <td>
+            <%= new Date(r.endDate).toLocaleDateString("fr-FR") %>
+          </td>
+          <td>
 
-<% if (catwayNumber) { %>
-  <a href="/catways/<%= catwayNumber %>">Retour au catway</a>
-<% } else { %>
-  <a href="/catways">Retour aux catways</a>
-<% } %>
+            <a href="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>">Voir</a>
+            <a href="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>/edit">Modifier</a>
+            <form action="/catways/<%= r.catwayNumber %>/reservations/<%= r._id %>?_method=DELETE" method="POST"
+              style="display:inline;">
+              <button type="submit">Supprimer</button>
+            </form>
+
+          </td>
+        </tr>
+        <% }) %>
+    </table>
+
+    <% if (catwayNumber) { %>
+      <a href="/catways/<%= catwayNumber %>">Retour au catway</a>
+      <% } else { %>
+        <a href="/catways">Retour aux catways</a>
+        <% } %>

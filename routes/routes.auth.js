@@ -27,9 +27,9 @@ router.post('/login', async (req, res) => {
   });
 
   res.redirect('/dashboard');
- 
+
 });
 
 // 🚀 ROUTE LOGOUT 
-  router.get('/logout', (req, res) => { res.clearCookie("token"); res.redirect('/'); });
+router.get('/logout', (req, res) => { res.clearCookie("token"); res.redirect('/'); });
 module.exports = router;

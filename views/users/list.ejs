@@ -9,10 +9,14 @@
     <th>Actions</th>
   </tr>
 
-  <% users.forEach(user => { %>
+  <% users.forEach(user=> { %>
     <tr>
-      <td><%= user.username %></td>
-      <td><%= user.email %></td>
+      <td>
+        <%= user.username %>
+      </td>
+      <td>
+        <%= user.email %>
+      </td>
       <td>
         <a href="/users/<%= user.email %>">Voir</a>
         <a href="/users/<%= user.email %>/edit">Modifier</a>
@@ -21,5 +25,5 @@
         </form>
       </td>
     </tr>
-  <% }) %>
+    <% }) %>
 </table>
