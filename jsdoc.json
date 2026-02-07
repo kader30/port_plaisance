@@ -1,0 +1,17 @@
+{
+  "source": {
+    "include": ["./routes","app.js", "./pages", "./services", "./models"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules|public)"
+  },
+  "opts": {
+    "destination": "./docs",
+    "recurse": true,
+    "template": "node_modules/docdash"
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  }
+}

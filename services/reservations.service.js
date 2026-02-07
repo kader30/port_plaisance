@@ -1,6 +1,18 @@
+/**
+ * @file Gestion des pages liées aux réservations (CRUD + vues EJS).
+* @module Services/reservations
+ * @description
+ * Ce module contient les handlers Express permettant :
+ * - d’afficher les réservations d’un catway
+ * - d’afficher les formulaires de création et d’édition
+ * - de créer, modifier et supprimer une réservation
+ */
+
+
 const Reservation = require('../models/Reservation');
 
 // LISTE DES RÉSERVATIONS D’UN CATWAY
+
 exports.getReservationsByCatway = async (req, res, next) => {
   try {
     const reservations = await Reservation.find({ catwayNumber: req.params.id });
@@ -15,6 +27,16 @@ exports.getReservationsByCatway = async (req, res, next) => {
 };
 
 // PAGE FORMULAIRE DE CRÉATION
+/**
+ * Affiche la page du formulaire de création d’une réservation.
+ *
+ * @async
+ * @function CreateReservation
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Next} next
+ * @returns {Promise<void>}
+ */
 exports.CreateReservation = async (req, res, next) => {
   try {
     res.render('reservations/create', {
@@ -27,6 +49,16 @@ exports.CreateReservation = async (req, res, next) => {
 };
 
 // CRÉATION
+/**
+ * Crée une nouvelle réservation.
+ *
+ * @async
+ * @function createReservation
+ * @param {Request} req - Données envoyées par le formulaire
+ * @param {Response} res
+ * @param {Next} next
+ * @returns {Promise<void>}
+ */
 exports.createReservation = async (req, res, next) => {
   try {
     const newReservation = new Reservation({
@@ -45,6 +77,8 @@ exports.createReservation = async (req, res, next) => {
 };
 
 // PAGE ÉDITION
+ // Affiche la page d’édition d’une réservation.
+ 
 exports.EditReservation = async (req, res, next) => {
   try {
     const reservation = await Reservation.findById(req.params.resId);
@@ -60,6 +94,16 @@ exports.EditReservation = async (req, res, next) => {
 };
 
 // MISE À JOUR
+/**
+ * Met à jour une réservation existante.
+ *
+ * @async
+ * @function updateReservation
+ * @param {Request} req - Données mises à jour
+ * @param {Response} res
+ * @param {Next} next
+ * @returns {Promise<void>}
+ */
 exports.updateReservation = async (req, res, next) => {
   try {
     await Reservation.findByIdAndUpdate(req.params.resId, req.body);
@@ -70,6 +114,17 @@ exports.updateReservation = async (req, res, next) => {
 };
 
 //delete reservation
+/**
+ * Supprime une réservation.
+ *
+ * @async
+ * @function deleteReservation
+ * @param {Request} req - Contient `req.params.resId`
+ * @param {Response} res
+ * @param {Next} next
+ * @returns {Promise<void>}
+ * @throws {Error} Si la réservation n’existe pas
+ */
 exports.deleteReservation = async (req, res, next) => {
   try {
     const deleted = await Reservation.findByIdAndDelete(req.params.resId);
