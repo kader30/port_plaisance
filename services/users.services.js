@@ -13,7 +13,7 @@
 
 
 const User = require('../models/User');
-
+const bcrypt = require('bcrypt');
 /**
  * Récupère tous les utilisateurs.
  *
@@ -91,9 +91,18 @@ exports.createUser = async (req, res, next) => {
  */
 exports.updateUser = async (req, res, next) => {
     try {
+        const dataToUpdate = { ...req.body };
+         // Si un mot de passe est fourni, on le hash
+          if (req.body.password && req.body.password.trim() !== "") {
+             dataToUpdate.password = await bcrypt.hash(req.body.password, 10);
+             } else { 
+        //  Si le champ est vide, on ne touche pas au mot de passe
+              delete dataToUpdate.password; 
+                }
         const updatedUser = await User.findOneAndUpdate(
             { email: req.params.email },
-            req.body,
+           
+            dataToUpdate,
             { new: true }
         );
 
@@ -119,6 +128,10 @@ exports.updateUser = async (req, res, next) => {
  */
 exports.deleteUser = async (req, res, next) => {
     try {
+        if (req.user.email === req.params.email) {
+            return res.status(400).json({ message: "Vous ne pouvez pas supprimer votre propre compte" });
+        }
+       
         const deletedUser = await User.findOneAndDelete({ email: req.params.email });
 
         if (!deletedUser) {
