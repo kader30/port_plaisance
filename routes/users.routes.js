@@ -9,7 +9,7 @@ router.get('/', authJWT, serviceUser.getAllUsers);
 
 // ajouter les autres routes CRUD pour les utilisateurs (POST, PUT, DELETE)
 // POST /users - créer un nouvel utilisateur
-router.post('/', serviceUser.createUser);
+router.post('/create', authJWT,serviceUser.createUser);
 
 // GET /users/:email - récupérer les détails d'un utilisateur
 router.get('/:email', authJWT, serviceUser.getUserByEmail);

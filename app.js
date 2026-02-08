@@ -42,6 +42,7 @@ const authRoutes = require('./routes/routes.auth');
 const userRoutes = require('./routes/users.routes');
 const catwayRoutes = require('./routes/catways.routes');
 const reservationRoutes = require('./routes/reservations.routes');
+
 /**
  * Initialise la connexion MongoDB via le module dédié.
  * @see module:data_base/port_russellDb
@@ -52,7 +53,8 @@ mongoDB.initClientDbConnection();
  * @constant
  */
 var app = express();
-
+app.use((req, res, next) => { res.locals.secured = false; // par défaut : route non sécurisée
+ next(); });
 /**
  * Configuration du moteur de vues :
  * - utilisation de EJS
@@ -78,6 +80,7 @@ app.use(methodOverride('_method'));
  * Page d'accueil.
  * @route GET /
  */
+
 app.get('/', (req, res) => res.render('index', { title: "Accueil" }));
 
 /**

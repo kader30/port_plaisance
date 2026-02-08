@@ -34,6 +34,7 @@ module.exports = function (req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
+    res.locals.secured = true;
     next();
   } catch (err) {
     return res.redirect("/");

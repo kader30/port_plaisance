@@ -1,11 +1,21 @@
 <header>
   <nav>
-    <a href="/dashboard">Dashboard</a>
-    <a href="/users">Utilisateurs</a>
-    <a href="/catways">Catways</a>
-    <a href="/reservations">Réservations</a>
-    <a href="/docs" target="_blank">Documentation</a>
-    <a href="/logout">Déconnexion</a>
+    
+
+    <% if (secured) { %>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/users">Utilisateurs</a>
+      <a href="/catways">Catways</a>
+      <a href="/reservations">Réservations</a>
+     
+      <a href="/logout">Déconnexion</a>
+    <% } else { %>
+      <a href="/">Accueil</a>
+      
+    <% } %>
+     <a href="/docs" target="_blank">Documentation</a>
   </nav>
 </header>
 <hr>
+
+
