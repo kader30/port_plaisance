@@ -8,11 +8,12 @@ router.get('/', authJWT, async (req, res) => {
     const users = await User.find();
     res.render('users/list', { title: "Liste des utilisateurs", users });
 });
+//  PAGE DE CREATION D’UN UTILISATEUR
+ router.get('/create',authJWT, (req, res) => { res.render('users/create', { title: "Créer un utilisateur" }); });
 
-// PAGE CRÉATION
-router.get('/create', authJWT, (req, res) => {
-    res.render('users/create', { title: "Créer un utilisateur" });
-});
+//  TRAITEMENT DU FORMULAIRE
+ router.post('/create',authJWT, async (req, res) => { 
+    await User.create(req.body); res.redirect('/users'); });
 
 // PAGE DÉTAILS
 router.get('/:email', authJWT, async (req, res) => {

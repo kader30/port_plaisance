@@ -70,7 +70,7 @@ exports.createCatway = async (req, res, next) => {
         const newCatway = new Catway(req.body);
         await newCatway.save();
 
-        res.status(201).json(newCatway);
+      res.redirect('/catways');
     } catch (error) {
         next(error);
     }
@@ -122,7 +122,7 @@ exports.deleteCatway = async (req, res, next) => {
             return res.status(404).json({ message: 'Catway non trouvé' });
         }
 
-        res.status(204).send();
+       res.redirect('/catways');
     } catch (error) {
         next(error);
     }
