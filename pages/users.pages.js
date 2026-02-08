@@ -10,7 +10,7 @@ router.get('/', authJWT, async (req, res) => {
 });
 
 // PAGE CRÉATION
-router.get('/create', authJWT, (req, res) => {
+router.get('/create', (req, res) => {
     res.render('users/create', { title: "Créer un utilisateur" });
 });
 
