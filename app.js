@@ -42,7 +42,7 @@ const authRoutes = require('./routes/routes.auth');
 const userRoutes = require('./routes/users.routes');
 const catwayRoutes = require('./routes/catways.routes');
 const reservationRoutes = require('./routes/reservations.routes');
-
+const Reservation = require('./models/Reservation');
 /**
  * Initialise la connexion MongoDB via le module dédié.
  * @see module:data_base/port_russellDb
@@ -87,9 +87,11 @@ app.get('/', (req, res) => res.render('index', { title: "Accueil" }));
  * Page Dashboard (protégée par JWT).
  * @route GET /dashboard
  */
-app.get('/dashboard', authJWT, (req, res) => {
+app.get('/dashboard', authJWT, async (req, res) => {
   const today = new Date();
-  res.render('dashboard', { title: "Dashboard", user: req.user, today });
+  const reservations = await Reservation.find(); // Charger les réservations
+  const catwayNumber = null; //  Ajout obligatoire
+  res.render('dashboard', { title: "Dashboard", user: req.user, today, reservations, catwayNumber });
 });
 
 /**

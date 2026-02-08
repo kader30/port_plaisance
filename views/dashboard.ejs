@@ -5,3 +5,36 @@
 <p>Date : <%= today.toLocaleDateString() %>
 </p>
 
+<H3>Les reservations en cours</H3>
+ 
+
+
+
+    <table border="1">
+      <tr>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+      
+      </tr>
+
+      <% reservations.forEach(r=> { %>
+        <tr>
+          <td>
+            <%= r.clientName %>
+          </td>
+          <td>
+            <%= r.boatName %>
+          </td>
+          <td>
+            <%= new Date(r.startDate).toLocaleDateString("fr-FR") %>
+          </td>
+          <td>
+            <%= new Date(r.endDate).toLocaleDateString("fr-FR") %>
+          </td>
+        </tr>
+        <% }) %>
+    </table>
+
+  
